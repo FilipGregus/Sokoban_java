@@ -18,71 +18,65 @@ public class Movement {
             return;
         }
 
-        if (getObjectAtPosition(newPos, gameController.getGameObjects()) == null || getObjectAtPosition(newPos, gameController.getGameObjects()).getObjectType() == ObjectType.BoxTarget) {
+        ArrayList<GameObject> objects = gameController.getGameObjects();
+        GameObject destObj = getObjectAtPosition(newPos, objects);
+
+        // Helper to finalize a successful move: update player position and redraw once
+        Runnable finalizePlayerMove = () -> {
             playerObj.setPosition(newPos);
+            // ensure player's image is refreshed if needed
+            playerObj.getImg().makeInvisible();
+            playerObj.getImg().makeVisible();
             gameController.drawBoard();
-        } else {
-            GameObject objAtNewPos = getObjectAtPosition(newPos, gameController.getGameObjects());
-            if (objAtNewPos.getObjectType() == ObjectType.Box ) {
-                Position boxNewPos = new Position(newPos.getX() + deltaX, newPos.getY() + deltaY);
-                if (inBoard(boxNewPos, gameController.getRows(), gameController.getColumns())) {
-                    if(getObjectAtPosition(boxNewPos, gameController.getGameObjects()) == null) {
-                        // Move the box
-                        objAtNewPos.setPosition(boxNewPos);
-                        objAtNewPos.setImg(gameController.getBoxImgData());
-                        // Move the player
-                        playerObj.setPosition(newPos);
-                        gameController.drawBoard();
-                    }else if(getObjectAtPosition(boxNewPos, gameController.getGameObjects()).getObjectType() == ObjectType.BoxTarget) {
-                        // Move the box onto the target
-                        objAtNewPos.setPosition(boxNewPos);
-                        objAtNewPos.setObjectType(ObjectType.CorrectBox);
-                        objAtNewPos.setImg(gameController.getCorrectBoxImgData());
+        };
 
-                        GameObject targetBox = getObjectAtPosition(boxNewPos, gameController.getGameObjects());
-                        targetBox.getImg().makeInvisible();
-                        gameController.getGameObjects().remove(targetBox);
-                        // Move the player
-                        playerObj.setPosition(newPos);
-                        gameController.drawBoard();
-                    }
-
-                }
-            } else if(objAtNewPos.getObjectType() == ObjectType.CorrectBox){
-                Position boxNewPos = new Position(newPos.getX() + deltaX, newPos.getY() + deltaY);
-                if (inBoard(boxNewPos, gameController.getRows(), gameController.getColumns())) {
-                    if(getObjectAtPosition(boxNewPos, gameController.getGameObjects()) == null) {
-                        // Move the box
-                        objAtNewPos.setPosition(boxNewPos);
-                        objAtNewPos.setImg(gameController.getBoxImgData());
-                        objAtNewPos.setObjectType(ObjectType.Box);
-                        gameController.getGameObjects().add( new GameObject(newPos.getX(), newPos.getY(),
-                                ObjectType.BoxTarget, gameController.getTargetBoxImgData(),  gameController.getBoxSize()));
-                        // Move the player
-                        playerObj.setPosition(newPos);
-                        playerObj.getImg().makeInvisible();
-                        playerObj.getImg().makeVisible();
-                        gameController.drawBoard();
-                    }else if(getObjectAtPosition(boxNewPos, gameController.getGameObjects()).getObjectType() == ObjectType.BoxTarget) {
-                        // Move the box onto the target
-                        objAtNewPos.setPosition(boxNewPos);
-                        objAtNewPos.setImg(gameController.getCorrectBoxImgData());
-                        objAtNewPos.setObjectType(ObjectType.CorrectBox);
-                        gameController.getGameObjects().add( new GameObject(newPos.getX(), newPos.getY(),
-                                ObjectType.BoxTarget, gameController.getTargetBoxImgData(),  gameController.getBoxSize()));
-                        // Move the player
-                        playerObj.setPosition(newPos);
-                        playerObj.getImg().makeInvisible();
-                        playerObj.getImg().makeVisible();
-                        gameController.drawBoard();
-                    }
-
-                }
-            }
-
+        // If destination empty or is a target, just move player
+        if (destObj == null || destObj.getObjectType() == ObjectType.BoxTarget) {
+            finalizePlayerMove.run();
+            return;
         }
 
+        // If destination has a box (normal or correct), attempt to push
+        if (destObj.getObjectType() == ObjectType.Box || destObj.getObjectType() == ObjectType.CorrectBox) {
+            Position boxNewPos = new Position(newPos.getX() + deltaX, newPos.getY() + deltaY);
+            if (!inBoard(boxNewPos, gameController.getRows(), gameController.getColumns())) {
+                return; // can't push out of board
+            }
 
+            GameObject boxDestObj = getObjectAtPosition(boxNewPos, objects);
+            // Can't push into another box or non-empty cell (except target)
+            if (boxDestObj != null && boxDestObj.getObjectType() != ObjectType.BoxTarget) {
+                return;
+            }
+
+            boolean boxWasOnTarget = destObj.getObjectType() == ObjectType.CorrectBox;
+            boolean boxMovingOntoTarget = boxDestObj != null && boxDestObj.getObjectType() == ObjectType.BoxTarget;
+
+            // Move the box object to new position and set its type/image
+            destObj.setPosition(boxNewPos);
+            if (boxMovingOntoTarget) {
+                destObj.setObjectType(ObjectType.CorrectBox);
+                destObj.setImg(gameController.getCorrectBoxImgData());
+
+                // remove the target object now covered by the correct box
+                objects.remove(boxDestObj);
+                boxDestObj.getImg().makeInvisible();
+            } else {
+                // moving onto plain floor
+                destObj.setObjectType(ObjectType.Box);
+                destObj.setImg(gameController.getBoxImgData());
+            }
+
+            // If the box moved off a target, restore a BoxTarget at the old box position
+            if (boxWasOnTarget) {
+                GameObject restoredTarget = new GameObject(newPos.getX(), newPos.getY(),
+                        ObjectType.BoxTarget, gameController.getTargetBoxImgData(), gameController.getBoxSize());
+                objects.add(restoredTarget);
+            }
+
+            // Finally move the player into the box's old position
+            finalizePlayerMove.run();
+        }
     }
 
     private GameObject getObjectAtPosition(Position position, ArrayList<GameObject> gameObjects) {
