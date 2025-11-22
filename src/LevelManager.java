@@ -1,40 +1,21 @@
-import fri.shapesge.Image;
-import fri.shapesge.ImageData;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LevelManager {
-    private String pathToLevels;
-    private int currentLevel;
-    private int totalLevels;
-    private int columns = 0;
-    private int rows = 0;
-    private ImageData boxImgData;
-    private ImageData correctBoxImgData;
-    private ImageData playerImgData;
-    private ImageData targetBoxImgData;
-    private ImageData wallImgData;
-    private int boxSize;
+    private final String pathToLevels;
+    private int actualColumns = 0;
+    private int actualRows = 0;
+    private final int boxSize;
 
-
-    public LevelManager(String pathToLevels, ImageData playerImgData,
-                        ImageData targetBoxImgData, ImageData wallImgData, ImageData correctBoxImgData, ImageData boxImgData
-    , int boxSize) {
+    public LevelManager(String pathToLevels, int boxSize) {
         this.pathToLevels = pathToLevels;
-        this.playerImgData = playerImgData;
-        this.targetBoxImgData = targetBoxImgData;
-        this.wallImgData = wallImgData;
-        this.correctBoxImgData = correctBoxImgData;
-        this.boxImgData = boxImgData;
         this.boxSize = boxSize;
-
     }
 
     public ArrayList<GameObject> loadLevel(int levelNumber) {
-        ArrayList<GameObject> levelObjects = new ArrayList<>();
+        ArrayList<GameObject> loadedObjects = new ArrayList<>();
         Scanner scanner = null;
         try {
             File file = new File(pathToLevels + "/level" + levelNumber + ".txt");
@@ -43,40 +24,33 @@ public class LevelManager {
             System.err.println("Error: " + e.getMessage());
         }
 
+        if( scanner != null) {
+            actualColumns = scanner.nextInt();
+            actualRows = scanner.nextInt();
+            scanner.nextLine();
+        }
 
-        assert scanner != null;
-        columns = scanner.nextInt();
-        rows = scanner.nextInt();
-
-        scanner.nextLine();
-
-        for (int i = 0; i < rows; i++) {
+        for (int i = 0; i < actualRows; i++) {
             String line = scanner.nextLine();
-            for (int j = 0; j < columns; j++) {
+            for (int j = 0; j < actualColumns; j++) {
                 char ch = line.charAt(j);
-                GameObject obj = switch (ch) {
-                    case 'P' -> new GameObject(j, i, ObjectType.Player, playerImgData,this.boxSize);
-                    case 'X' -> new GameObject(j, i, ObjectType.Wall, wallImgData,this.boxSize);
-                    case 'B' -> new GameObject(j, i, ObjectType.Box, boxImgData,this.boxSize);
-                    case 'C' -> new GameObject(j, i, ObjectType.CorrectBox, correctBoxImgData,this.boxSize);
-                    case 'O' -> new GameObject(j, i, ObjectType.BoxTarget, targetBoxImgData,this.boxSize);
+                ObjectType type = switch (ch) {
+                    case 'P' -> ObjectType.Player;
+                    case 'X' -> ObjectType.Wall;
+                    case 'B' -> ObjectType.Box;
+                    case 'C' -> ObjectType.CorrectBox;
+                    case 'O' -> ObjectType.BoxTarget;
                     default -> null;
                 };
-                if (obj != null) {
-                    levelObjects.add(obj);
+                if (type != null) {
+                    loadedObjects.add(new GameObject(j, i, type, this.boxSize) );
                 }
             }
         }
 
-
-        return levelObjects;
+        return loadedObjects;
     }
 
-    public int getColumns() {
-        return columns;
-    }
-
-    public int getRows() {
-        return rows;
-    }
+    public int getActualColumns() { return actualColumns; }
+    public int getActualRows() { return actualRows; }
 }

@@ -8,6 +8,7 @@ public class Player {
         this.gameController = gameController;
         gameController.getGameManager().manageObject(this);
         movement = new Movement(gameController);
+        playerObject.getImg().makeVisible();
     }
 
     public GameObject getPlayerObject() {
@@ -16,18 +17,22 @@ public class Player {
 
     public void moveDown() {
         movement.makeMove(0, 1, this);
+        gameController.checkWin();
     }
 
     public void moveUp() {
         movement.makeMove(0, -1, this);
+        gameController.checkWin();
     }
 
     public void moveLeft() {
         movement.makeMove(-1, 0, this);
+        gameController.checkWin();
     }
 
     public void moveRight() {
         movement.makeMove(1, 0, this);
+        gameController.checkWin();
     }
 
 

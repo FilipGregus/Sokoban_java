@@ -1,5 +1,3 @@
-import fri.shapesge.engine.Game;
-
 import java.util.ArrayList;
 
 public class Movement {
@@ -14,7 +12,7 @@ public class Movement {
         Position currentPos = playerObj.getPosition();
         Position newPos = new Position(currentPos.getX() + deltaX, currentPos.getY() + deltaY);
 
-        if (!inBoard(newPos, gameController.getRows(), gameController.getColumns())) {
+        if (!inBoard(newPos, gameController.getActualLevelRows(), gameController.getActualLevelColumns())) {
             return;
         }
 
@@ -27,7 +25,7 @@ public class Movement {
             // ensure player's image is refreshed if needed
             playerObj.getImg().makeInvisible();
             playerObj.getImg().makeVisible();
-            gameController.drawBoard();
+            gameController.drawGround();
         };
 
         // If destination empty or is a target, just move player
@@ -39,7 +37,7 @@ public class Movement {
         // If destination has a box (normal or correct), attempt to push
         if (destObj.getObjectType() == ObjectType.Box || destObj.getObjectType() == ObjectType.CorrectBox) {
             Position boxNewPos = new Position(newPos.getX() + deltaX, newPos.getY() + deltaY);
-            if (!inBoard(boxNewPos, gameController.getRows(), gameController.getColumns())) {
+            if (!inBoard(boxNewPos, gameController.getActualLevelRows(), gameController.getActualLevelColumns())) {
                 return; // can't push out of board
             }
 
@@ -70,7 +68,9 @@ public class Movement {
             // If the box moved off a target, restore a BoxTarget at the old box position
             if (boxWasOnTarget) {
                 GameObject restoredTarget = new GameObject(newPos.getX(), newPos.getY(),
-                        ObjectType.BoxTarget, gameController.getTargetBoxImgData(), gameController.getBoxSize());
+                        ObjectType.BoxTarget, gameController.getBoxSize());
+                restoredTarget.setImg(gameController.getTargetBoxImgData());
+                restoredTarget.getImg().makeVisible();
                 objects.add(restoredTarget);
             }
 

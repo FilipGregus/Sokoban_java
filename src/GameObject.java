@@ -8,13 +8,11 @@ public class GameObject {
 
     private Image img;
 
-    public GameObject(int x, int y, ObjectType objectType, ImageData imgData, int boxSize) {
+    public GameObject(int x, int y, ObjectType objectType, int boxSize) {
         this.boxSize = boxSize;
         this.position = new Position(x, y);
         this.objectType = objectType;
-        this.img = new Image(imgData, x * boxSize, y * boxSize);
-        this.img.changePosition(position.getX() * boxSize, position.getY() * boxSize);
-        this.img.makeVisible();
+        this.img = null;
     }
 
     public Position getPosition() {
@@ -36,6 +34,11 @@ public class GameObject {
     }
 
     public void setImg(ImageData img) {
+        if(this.img == null) {
+            this.img= new Image(img, this.position.getX() * boxSize, this.position.getY() * boxSize);
+            return;
+        }
+
         this.img.changeImage(img);
     }
 
