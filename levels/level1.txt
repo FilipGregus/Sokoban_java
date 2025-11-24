@@ -1,9 +1,10 @@
-9 8
+9 9
 XXXXXXXXX
-XX   XXXX
-X O O  XX
-X X XX XX
-X    BBPX
-XXX X   X
-XXX   XXX
+X   O   X
+X  B    X
+X XXX X X
+X   P   X
+X X XXX X
+X    B  X
+X   O   X
 XXXXXXXXX

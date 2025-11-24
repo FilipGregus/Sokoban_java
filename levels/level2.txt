@@ -1,0 +1,9 @@
+10 8
+XXXXXXXXXX
+X   X    X
+X B   B  X
+X   O    X
+XXX XXX XX
+X   P    X
+X   O    X
+XXXXXXXXXX
