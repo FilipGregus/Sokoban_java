@@ -2,6 +2,8 @@ import fri.shapesge.ImageData;
 import fri.shapesge.Manager;
 import fri.shapesge.Image;
 
+import javax.swing.JOptionPane;
+
 import java.util.ArrayList;
 
 public class GameController {
@@ -17,7 +19,7 @@ public class GameController {
     private ImageData wallImgData;
     private int boxSize;
     private Player player;
-
+    private int currentLevel;
 
 
     public GameController(int boxSize) {
@@ -34,7 +36,8 @@ public class GameController {
         this.boxSize = boxSize;
         this.levelManager = new LevelManager("./levels", boxSize);
 
-        this.gameObjects = loadBoard(1);
+        this.currentLevel = 1;
+        this.gameObjects = loadBoard(currentLevel);
         drawGround();
     }
 
@@ -47,26 +50,26 @@ public class GameController {
             GameObject obj = null;
             switch (load.getObjectType()) {
                 case Player -> {
-                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.Player,  this.boxSize);
+                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.Player, this.boxSize);
                     obj.setImg(this.playerImgData);
                     this.player = new Player(obj, this);
                     // player will be managed by Player wrapper; don't add yet
                 }
-                case Wall ->{
+                case Wall -> {
                     obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.Wall, this.boxSize);
                     obj.setImg(this.wallImgData);
                 }
 
-                case Box ->{
-                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.Box,  this.boxSize);
+                case Box -> {
+                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.Box, this.boxSize);
                     obj.setImg(this.boxImgData);
                 }
-                case CorrectBox ->{
+                case CorrectBox -> {
                     obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.CorrectBox, this.boxSize);
                     obj.setImg(this.correctBoxImgData);
                 }
-                case BoxTarget ->{
-                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.BoxTarget,  this.boxSize);
+                case BoxTarget -> {
+                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.BoxTarget, this.boxSize);
                     obj.setImg(this.targetBoxImgData);
                 }
             }
@@ -80,10 +83,8 @@ public class GameController {
     }
 
 
-
-
     public void drawGround() {
-        for(Image img : grounds) {
+        for (Image img : grounds) {
             img.makeInvisible();
         }
 
@@ -101,7 +102,7 @@ public class GameController {
                 if (isEmpty) {
                     Image ground = new Image(groundImgData, x * this.boxSize, y * this.boxSize);
                     ground.makeVisible();
-                     grounds.add(ground);
+                    grounds.add(ground);
                 }
             }
         }
@@ -127,11 +128,11 @@ public class GameController {
         return boxImgData;
     }
 
-    public ImageData getCorrectBoxImgData(){
+    public ImageData getCorrectBoxImgData() {
         return correctBoxImgData;
     }
 
-    public ImageData getTargetBoxImgData(){
+    public ImageData getTargetBoxImgData() {
         return targetBoxImgData;
     }
 
@@ -150,8 +151,39 @@ public class GameController {
         }
 
         if (allBoxesOnTargets) {
-            System.out.println("You win!");
-            // Additional win logic can be added here
+            // small delay so the UI can repaint the last move before the blocking dialog
+            javax.swing.Timer timer = new javax.swing.Timer(120, e -> {
+                ((javax.swing.Timer) e.getSource()).stop();
+
+                String[] options = {"Continue", "Close"};
+                int choice = JOptionPane.showOptionDialog(
+                        null,
+                        "You win! What do you want to do?",
+                        "Level complete",
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE,
+                        null,
+                        options,
+                        options[0]
+                );
+
+                if (choice == 0) { // Continue
+                    for (GameObject obj : gameObjects) {
+                        if (obj.getImg() != null) obj.getImg().makeInvisible();
+                    }
+                    if (player != null && player.getPlayerObject() != null && player.getPlayerObject().getImg() != null) {
+                        player.getPlayerObject().getImg().makeInvisible();
+                    }
+
+                    currentLevel++;
+                    this.gameObjects = loadBoard(currentLevel);
+                    drawGround();
+                } else { // Close or dialog closed
+                    System.exit(0);
+                }
+            });
+            timer.setRepeats(false);
+            timer.start();
         }
     }
 
