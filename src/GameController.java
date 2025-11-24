@@ -173,9 +173,12 @@ public class GameController {
                     }
                     if (player != null && player.getPlayerObject() != null && player.getPlayerObject().getImg() != null) {
                         player.getPlayerObject().getImg().makeInvisible();
+                        this.gameManager.stopManagingObject(this.player);
+                        player = null;
                     }
 
                     currentLevel++;
+                    this.gameObjects.clear();
                     this.gameObjects = loadBoard(currentLevel);
                     drawGround();
                 } else { // Close or dialog closed
