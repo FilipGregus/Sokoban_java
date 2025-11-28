@@ -155,11 +155,11 @@ public class GameController {
             javax.swing.Timer timer = new javax.swing.Timer(120, e -> {
                 ((javax.swing.Timer) e.getSource()).stop();
 
-                String[] options = {"Continue", "Close"};
+                String[] options = {"Pokračovať", "Ukončiť"};
                 int choice = JOptionPane.showOptionDialog(
                         null,
-                        "You win! What do you want to do?",
-                        "Level complete",
+                        "Vyhral si! Chceš pokračovať na ďalšiu úroveň?",
+                        "Gratulujem!",
                         JOptionPane.DEFAULT_OPTION,
                         JOptionPane.INFORMATION_MESSAGE,
                         null,
