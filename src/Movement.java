@@ -19,18 +19,11 @@ public class Movement {
         ArrayList<GameObject> objects = gameController.getGameObjects();
         GameObject destObj = getObjectAtPosition(newPos, objects);
 
-        // Helper to finalize a successful move: update player position and redraw once
-        Runnable finalizePlayerMove = () -> {
-            playerObj.setPosition(newPos);
-            // ensure player's image is refreshed if needed
-            playerObj.getImg().makeInvisible();
-            playerObj.getImg().makeVisible();
-            gameController.drawGround();
-        };
+
 
         // If destination empty or is a target, just move player
         if (destObj == null || destObj.getObjectType() == ObjectType.BoxTarget) {
-            finalizePlayerMove.run();
+            finalizePlayerMove(newPos, playerObj);
             return;
         }
 
@@ -75,8 +68,16 @@ public class Movement {
             }
 
             // Finally move the player into the box's old position
-            finalizePlayerMove.run();
+            finalizePlayerMove(newPos, playerObj);
         }
+    }
+
+    private void finalizePlayerMove(Position newPos, GameObject playerObj) {
+        playerObj.setPosition(newPos);
+        // ensure player's image is refreshed if needed
+        playerObj.getImg().makeInvisible();
+        playerObj.getImg().makeVisible();
+        gameController.drawGround();
     }
 
     private GameObject getObjectAtPosition(Position position, ArrayList<GameObject> gameObjects) {
