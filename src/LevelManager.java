@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class LevelManager {
@@ -53,4 +54,9 @@ public class LevelManager {
 
     public int getActualColumns() { return actualColumns; }
     public int getActualRows() { return actualRows; }
+
+    public int getLevelsCount() {
+        File folder = new File(pathToLevels);
+        return Objects.requireNonNull(folder.listFiles((dir, name) -> name.endsWith(".txt"))).length;
+    }
 }

@@ -20,6 +20,7 @@ public class GameController {
     private int boxSize;
     private Player player;
     private int currentLevel;
+    private int levelsCount;
 
 
     public GameController(int boxSize) {
@@ -39,6 +40,7 @@ public class GameController {
         this.currentLevel = 1;
         this.gameObjects = loadBoard(currentLevel);
         drawGround();
+        this.levelsCount = this.levelManager.getLevelsCount();
     }
 
     private ArrayList<GameObject> loadBoard(int levelNumber) {
@@ -151,43 +153,76 @@ public class GameController {
         }
 
         if (allBoxesOnTargets) {
-            // small delay so the UI can repaint the last move before the blocking dialog
-            javax.swing.Timer timer = new javax.swing.Timer(120, e -> {
-                ((javax.swing.Timer) e.getSource()).stop();
+            javax.swing.Timer timer;
 
-                String[] options = {"Pokračovať", "Ukončiť"};
-                int choice = JOptionPane.showOptionDialog(
-                        null,
-                        "Vyhral si! Chceš pokračovať na ďalšiu úroveň?",
-                        "Gratulujem!",
-                        JOptionPane.DEFAULT_OPTION,
-                        JOptionPane.INFORMATION_MESSAGE,
-                        null,
-                        options,
-                        options[0]
-                );
+            if (this.currentLevel < this.levelsCount) {
+                timer = new javax.swing.Timer(120, e -> {
+                    ((javax.swing.Timer) e.getSource()).stop();
 
-                if (choice == 0) { // Continue
-                    for (GameObject obj : gameObjects) {
-                        if (obj.getImg() != null) obj.getImg().makeInvisible();
+                    String[] options = {"Pokračovať", "Ukončiť"};
+                    int choice = JOptionPane.showOptionDialog(
+                            null,
+                            "Vyhral si! Chceš pokračovať na ďalšiu úroveň?",
+                            "Gratulujem!",
+                            JOptionPane.DEFAULT_OPTION,
+                            JOptionPane.INFORMATION_MESSAGE,
+                            null,
+                            options,
+                            options[0]
+                    );
+
+                    if (choice == 0) { // Continue
+                        clearBoard();
+                        currentLevel++;
+                        this.gameObjects = loadBoard(currentLevel);
+                        drawGround();
+                    } else { // Close or dialog closed
+                        System.exit(0);
                     }
-                    if (player != null && player.getPlayerObject() != null && player.getPlayerObject().getImg() != null) {
-                        player.getPlayerObject().getImg().makeInvisible();
-                        this.gameManager.stopManagingObject(this.player);
-                        player = null;
-                    }
+                });
+            } else {
+                timer = new javax.swing.Timer(120, e -> {
+                    ((javax.swing.Timer) e.getSource()).stop();
 
-                    currentLevel++;
-                    this.gameObjects.clear();
-                    this.gameObjects = loadBoard(currentLevel);
-                    drawGround();
-                } else { // Close or dialog closed
-                    System.exit(0);
-                }
-            });
+                    String[] options = {"Reštartovať", "Ukončiť"};
+                    int choice = JOptionPane.showOptionDialog(
+                            null,
+                            "Vyhral si všetky levely! Chceš pokračovať odznova?",
+                            "Gratulujem!",
+                            JOptionPane.DEFAULT_OPTION,
+                            JOptionPane.INFORMATION_MESSAGE,
+                            null,
+                            options,
+                            options[0]
+                    );
+
+                    if (choice == 0) { // Continue
+                        clearBoard();
+                        currentLevel = 1;
+                        this.gameObjects = loadBoard(currentLevel);
+                        drawGround();
+                    } else { // Close or dialog closed
+                        System.exit(0);
+                    }
+                });
+            }
             timer.setRepeats(false);
             timer.start();
         }
+    }
+
+    private void clearBoard() {
+        for (GameObject obj : gameObjects) {
+            if (obj.getImg() != null) obj.getImg().makeInvisible();
+        }
+
+        if (player != null && player.getPlayerObject() != null && player.getPlayerObject().getImg() != null) {
+            player.getPlayerObject().getImg().makeInvisible();
+            this.gameManager.stopManagingObject(this.player);
+            player = null;
+        }
+
+        this.gameObjects.clear();
     }
 
 }
