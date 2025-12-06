@@ -26,7 +26,7 @@ public class GameObject {
         this.boxSize = boxSize;
         this.position = new Position(x, y);
         this.objectType = objectType;
-        this.img = null;
+        this.setImg(objectType.getImageData());
     }
 
     /**
@@ -76,7 +76,7 @@ public class GameObject {
      * @author Filip Greguš
      */
 
-    public void setImg(ImageData img) {
+    private void setImg(ImageData img) {
         if(this.img == null) {
             this.img= new Image(img, this.position.getX() * boxSize, this.position.getY() * boxSize);
             return;
@@ -93,6 +93,7 @@ public class GameObject {
 
     public void setObjectType(ObjectType objectType) {
         this.objectType = objectType;
+        this.setImg(objectType.getImageData());
     }
 
 }

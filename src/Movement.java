@@ -47,7 +47,6 @@ public class Movement {
             destObj.setPosition(boxNewPos);
             if (boxMovingOntoTarget) {
                 destObj.setObjectType(ObjectType.CORRECT_BOX);
-                destObj.setImg(gameController.getCorrectBoxImgData());
 
                 // remove the target object now covered by the correct box
                 objects.remove(boxDestObj);
@@ -55,14 +54,12 @@ public class Movement {
             } else {
                 // moving onto plain floor
                 destObj.setObjectType(ObjectType.BOX);
-                destObj.setImg(gameController.getBoxImgData());
             }
 
             // If the box moved off a target, restore a BoxTarget at the old box position
             if (boxWasOnTarget) {
                 GameObject restoredTarget = new GameObject(newPos.getX(), newPos.getY(),
                         ObjectType.BOX_TARGET, gameController.getBoxSize());
-                restoredTarget.setImg(gameController.getTargetBoxImgData());
                 restoredTarget.getImg().makeVisible();
                 objects.add(restoredTarget);
             }

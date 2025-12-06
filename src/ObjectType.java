@@ -1,4 +1,20 @@
+import fri.shapesge.ImageData;
+
 public enum  ObjectType
 {
-    PLAYER, WALL, BOX, CORRECT_BOX, BOX_TARGET
+    PLAYER(new ImageData("src/icons/player.png")),
+    WALL(new ImageData("src/icons/wall.png")),
+    BOX(new ImageData("src/icons/box.png")),
+    CORRECT_BOX(new ImageData("src/icons/correct_box.png")),
+    BOX_TARGET(new ImageData("src/icons/target_box.png"));
+
+    private final ImageData imageData;
+
+    ObjectType(ImageData imageData){
+        this.imageData = imageData;
+    }
+
+    public ImageData getImageData(){
+        return this.imageData;
+    }
 }

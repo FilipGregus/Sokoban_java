@@ -15,12 +15,7 @@ public class GameController {
     private ArrayList<GameObject> gameObjects;
     private ArrayList<Image> grounds;
     private final LevelManager levelManager;
-    private final ImageData boxImgData;
-    private final ImageData correctBoxImgData;
     private final ImageData groundImgData;
-    private final ImageData playerImgData;
-    private final ImageData targetBoxImgData;
-    private final ImageData wallImgData;
     private Player player;
     private int currentLevel;
     private final int levelsCount;
@@ -37,12 +32,7 @@ public class GameController {
         this.gameManager.manageObject(this);
         this.gameObjects = new ArrayList<>();
         this.grounds = new ArrayList<>();
-        this.boxImgData = new ImageData("src/icons/box.png");
-        this.correctBoxImgData = new ImageData("src/icons/correct_box.png");
         this.groundImgData = new ImageData("src/icons/ground.png");
-        this.playerImgData = new ImageData("src/icons/player.png");
-        this.targetBoxImgData = new ImageData("src/icons/target_box.png");
-        this.wallImgData = new ImageData("src/icons/wall.png");
         this.levelManager = new LevelManager("./levels", BOX_SIZE);
 
         this.currentLevel = 1;
@@ -68,26 +58,21 @@ public class GameController {
             switch (load.getObjectType()) {
                 case PLAYER -> {
                     obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.PLAYER, BOX_SIZE);
-                    obj.setImg(this.playerImgData);
                     this.player = new Player(obj, this);
                     // player will be managed by Player wrapper; don't add yet
                 }
                 case WALL -> {
                     obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.WALL, BOX_SIZE);
-                    obj.setImg(this.wallImgData);
                 }
 
                 case BOX -> {
                     obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.BOX, BOX_SIZE);
-                    obj.setImg(this.boxImgData);
                 }
                 case CORRECT_BOX -> {
                     obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.CORRECT_BOX, BOX_SIZE);
-                    obj.setImg(this.correctBoxImgData);
                 }
                 case BOX_TARGET -> {
                     obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.BOX_TARGET, BOX_SIZE);
-                    obj.setImg(this.targetBoxImgData);
                 }
             }
             if (obj != null && obj.getObjectType() != ObjectType.PLAYER) {
@@ -165,33 +150,6 @@ public class GameController {
 
     public int getActualLevelColumns() {
         return levelManager.getActualColumns();
-    }
-
-    /** Getter pre box image
-     * @author Filip Greguš
-     * @return ImageData pre box
-     */
-
-    public ImageData getBoxImgData() {
-        return boxImgData;
-    }
-
-    /** Getter pre correctBox image
-     * @author Filip Greguš
-     * @return ImageData pre correctBox
-     */
-
-    public ImageData getCorrectBoxImgData() {
-        return correctBoxImgData;
-    }
-
-    /** Getter pre targetBox image
-     * @author Filip Greguš
-     * @return ImageData pre targetBox
-     */
-
-    public ImageData getTargetBoxImgData() {
-        return targetBoxImgData;
     }
 
     /** Getter pre veľkosť boxu
