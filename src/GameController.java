@@ -11,9 +11,9 @@ import java.util.ArrayList;
  */
 
 public class GameController {
-    private final Manager gameManager;
+    private static Manager gameManager;
     private ArrayList<GameObject> gameObjects;
-    private ArrayList<Image> grounds;
+    private final ArrayList<Image> grounds;
     private final LevelManager levelManager;
     private final ImageData groundImgData;
     private Player player;
@@ -28,8 +28,10 @@ public class GameController {
      */
 
     public GameController() {
-        this.gameManager = new Manager();
-        this.gameManager.manageObject(this);
+        if(gameManager == null) {
+            gameManager = new Manager();
+        }
+        gameManager.manageObject(this);
         this.gameObjects = new ArrayList<>();
         this.grounds = new ArrayList<>();
         this.groundImgData = new ImageData("src/icons/ground.png");
@@ -130,7 +132,7 @@ public class GameController {
      * @author Filip Greguš
      */
 
-    public Manager getGameManager() {
+    public static Manager getGameManager() {
         return gameManager;
     }
 
@@ -227,7 +229,7 @@ public class GameController {
 
         if (player != null && player.getPlayerObject() != null && player.getPlayerObject().getImg() != null) {
             player.getPlayerObject().getImg().makeInvisible();
-            this.gameManager.stopManagingObject(this.player);
+            gameManager.stopManagingObject(this.player);
             player = null;
         }
         this.gameObjects.clear();

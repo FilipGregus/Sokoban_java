@@ -13,7 +13,7 @@ public class Player {
     public Player(GameObject playerObject, GameController gameController) {
         this.playerObject = playerObject;
         this.gameController = gameController;
-        gameController.getGameManager().manageObject(this);
+        GameController.getGameManager().manageObject(this);
         movement = new Movement(gameController);
         playerObject.getImg().makeVisible();
     }
