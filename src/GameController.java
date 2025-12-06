@@ -1,7 +1,7 @@
 import fri.shapesge.ImageData;
 import fri.shapesge.Manager;
 import fri.shapesge.Image;
-import javax.swing.JOptionPane;
+
 import java.util.ArrayList;
 
 /**
@@ -25,7 +25,7 @@ public class GameController {
     private int currentLevel;
     private final int levelsCount;
 
-    private static final int boxSize = 50;
+    private static final int BOX_SIZE = 50;
 
     /**
      * Konštruktor triedy GameController inicializuje herný manažér, načíta úroveň a vykreslí hru
@@ -43,7 +43,7 @@ public class GameController {
         this.playerImgData = new ImageData("src/icons/player.png");
         this.targetBoxImgData = new ImageData("src/icons/target_box.png");
         this.wallImgData = new ImageData("src/icons/wall.png");
-        this.levelManager = new LevelManager("./levels", boxSize);
+        this.levelManager = new LevelManager("./levels", BOX_SIZE);
 
         this.currentLevel = 1;
         this.gameObjects = loadBoard(currentLevel);
@@ -67,26 +67,26 @@ public class GameController {
             GameObject obj = null;
             switch (load.getObjectType()) {
                 case Player -> {
-                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.Player, boxSize);
+                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.Player, BOX_SIZE);
                     obj.setImg(this.playerImgData);
                     this.player = new Player(obj, this);
                     // player will be managed by Player wrapper; don't add yet
                 }
                 case Wall -> {
-                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.Wall, boxSize);
+                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.Wall, BOX_SIZE);
                     obj.setImg(this.wallImgData);
                 }
 
                 case Box -> {
-                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.Box, boxSize);
+                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.Box, BOX_SIZE);
                     obj.setImg(this.boxImgData);
                 }
                 case CorrectBox -> {
-                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.CorrectBox, boxSize);
+                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.CorrectBox, BOX_SIZE);
                     obj.setImg(this.correctBoxImgData);
                 }
                 case BoxTarget -> {
-                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.BoxTarget, boxSize);
+                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.BoxTarget, BOX_SIZE);
                     obj.setImg(this.targetBoxImgData);
                 }
             }
@@ -122,7 +122,7 @@ public class GameController {
                 }
 
                 if (isEmpty) {
-                    Image ground = new Image(groundImgData, x * boxSize, y * boxSize);
+                    Image ground = new Image(groundImgData, x * BOX_SIZE, y * BOX_SIZE);
                     ground.makeVisible();
                     grounds.add(ground);
                 }
@@ -200,8 +200,13 @@ public class GameController {
      */
 
     public int getBoxSize() {
-        return boxSize;
+        return BOX_SIZE;
     }
+
+    /**
+     * Metóda na kontrolu výhry
+     * @author Filip Greguš
+     */
 
     public void checkWin() {
         boolean allBoxesOnTargets = true;
@@ -220,17 +225,7 @@ public class GameController {
                 timer = new javax.swing.Timer(120, e -> {
                     ((javax.swing.Timer) e.getSource()).stop();
 
-                    String[] options = {"Pokračovať", "Ukončiť"};
-                    int choice = JOptionPane.showOptionDialog(
-                            null,
-                            "Vyhral si! Chceš pokračovať na ďalšiu úroveň?",
-                            "Gratulujem!",
-                            JOptionPane.DEFAULT_OPTION,
-                            JOptionPane.INFORMATION_MESSAGE,
-                            null,
-                            options,
-                            options[0]
-                    );
+                    int choice = MessageBox.showNextLevelDialog();
 
                     if (choice == 0) { // Continue
                         clearBoard();
@@ -245,17 +240,7 @@ public class GameController {
                 timer = new javax.swing.Timer(120, e -> {
                     ((javax.swing.Timer) e.getSource()).stop();
 
-                    String[] options = {"Reštartovať", "Ukončiť"};
-                    int choice = JOptionPane.showOptionDialog(
-                            null,
-                            "Vyhral si všetky levely! Chceš pokračovať odznova?",
-                            "Gratulujem!",
-                            JOptionPane.DEFAULT_OPTION,
-                            JOptionPane.INFORMATION_MESSAGE,
-                            null,
-                            options,
-                            options[0]
-                    );
+                    int choice = MessageBox.showRestartDialog();
 
                     if (choice == 0) { // Continue
                         clearBoard();
@@ -272,6 +257,11 @@ public class GameController {
         }
     }
 
+    /**
+     * Metóda na vyčistenie hernej plochy
+     * @author Filip Greguš
+     */
+
     private void clearBoard() {
         for (GameObject obj : gameObjects) {
             if (obj.getImg() != null) obj.getImg().makeInvisible();
@@ -282,8 +272,6 @@ public class GameController {
             this.gameManager.stopManagingObject(this.player);
             player = null;
         }
-
         this.gameObjects.clear();
     }
-
 }
