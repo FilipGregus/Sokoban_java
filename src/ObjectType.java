@@ -1,4 +1,4 @@
 public enum  ObjectType
 {
-    Player, Wall, Box, CorrectBox, BoxTarget
+    PLAYER, WALL, BOX, CORRECT_BOX, BOX_TARGET
 }

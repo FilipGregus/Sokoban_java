@@ -66,31 +66,31 @@ public class GameController {
         for (GameObject load : loadedObjects) {
             GameObject obj = null;
             switch (load.getObjectType()) {
-                case Player -> {
-                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.Player, BOX_SIZE);
+                case PLAYER -> {
+                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.PLAYER, BOX_SIZE);
                     obj.setImg(this.playerImgData);
                     this.player = new Player(obj, this);
                     // player will be managed by Player wrapper; don't add yet
                 }
-                case Wall -> {
-                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.Wall, BOX_SIZE);
+                case WALL -> {
+                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.WALL, BOX_SIZE);
                     obj.setImg(this.wallImgData);
                 }
 
-                case Box -> {
-                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.Box, BOX_SIZE);
+                case BOX -> {
+                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.BOX, BOX_SIZE);
                     obj.setImg(this.boxImgData);
                 }
-                case CorrectBox -> {
-                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.CorrectBox, BOX_SIZE);
+                case CORRECT_BOX -> {
+                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.CORRECT_BOX, BOX_SIZE);
                     obj.setImg(this.correctBoxImgData);
                 }
-                case BoxTarget -> {
-                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.BoxTarget, BOX_SIZE);
+                case BOX_TARGET -> {
+                    obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.BOX_TARGET, BOX_SIZE);
                     obj.setImg(this.targetBoxImgData);
                 }
             }
-            if (obj != null && obj.getObjectType() != ObjectType.Player) {
+            if (obj != null && obj.getObjectType() != ObjectType.PLAYER) {
                 obj.getImg().makeVisible();
                 objects.add(obj);
             }
@@ -212,7 +212,7 @@ public class GameController {
         boolean allBoxesOnTargets = true;
 
         for (GameObject obj : gameObjects) {
-            if (obj.getObjectType() == ObjectType.Box) {
+            if (obj.getObjectType() == ObjectType.BOX) {
                 allBoxesOnTargets = false;
                 break;
             }

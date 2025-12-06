@@ -36,11 +36,11 @@ public class LevelManager {
             for (int j = 0; j < actualColumns; j++) {
                 char ch = line.charAt(j);
                 ObjectType type = switch (ch) {
-                    case 'P' -> ObjectType.Player;
-                    case 'X' -> ObjectType.Wall;
-                    case 'B' -> ObjectType.Box;
-                    case 'C' -> ObjectType.CorrectBox;
-                    case 'O' -> ObjectType.BoxTarget;
+                    case 'P' -> ObjectType.PLAYER;
+                    case 'X' -> ObjectType.WALL;
+                    case 'B' -> ObjectType.BOX;
+                    case 'C' -> ObjectType.CORRECT_BOX;
+                    case 'O' -> ObjectType.BOX_TARGET;
                     default -> null;
                 };
                 if (type != null) {
