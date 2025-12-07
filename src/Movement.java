@@ -1,7 +1,14 @@
 import java.util.ArrayList;
 
+/**
+ * Trieda Movement riadi pohyb hráča a interakciu s objektmi na hernej ploche
+ *
+ * @author Filip Greguš
+ * @version 1.0
+ */
+
 public class Movement {
-    private GameController gameController;
+    private final GameController gameController;
 
     public Movement(GameController gameController) {
         this.gameController = gameController;
@@ -21,21 +28,21 @@ public class Movement {
 
 
 
-        // If destination empty or is a target, just move player
+        // Pokiaľ je cielova pozícia prázdna môže sa posunúť
         if (destObj == null || destObj.getObjectType() == ObjectType.BOX_TARGET) {
             finalizePlayerMove(newPos, playerObj);
             return;
         }
 
-        // If destination has a box (normal or correct), attempt to push
+        // Pokiaľ je na cielovej pozícii box, môže ho posunúť
         if (destObj.getObjectType() == ObjectType.BOX || destObj.getObjectType() == ObjectType.CORRECT_BOX) {
             Position boxNewPos = new Position(newPos.getX() + deltaX, newPos.getY() + deltaY);
             if (!inBoard(boxNewPos, gameController.getActualLevelRows(), gameController.getActualLevelColumns())) {
-                return; // can't push out of board
+                return;
             }
 
             GameObject boxDestObj = getObjectAtPosition(boxNewPos, objects);
-            // Can't push into another box or non-empty cell (except target)
+            // Môže posunúť iba 1 box
             if (boxDestObj != null && boxDestObj.getObjectType() != ObjectType.BOX_TARGET) {
                 return;
             }
@@ -43,35 +50,34 @@ public class Movement {
             boolean boxWasOnTarget = destObj.getObjectType() == ObjectType.CORRECT_BOX;
             boolean boxMovingOntoTarget = boxDestObj != null && boxDestObj.getObjectType() == ObjectType.BOX_TARGET;
 
-            // Move the box object to new position and set its type/image
+            // Posun boxu na novú korektnú pozíciu
             destObj.setPosition(boxNewPos);
             if (boxMovingOntoTarget) {
                 destObj.setObjectType(ObjectType.CORRECT_BOX);
 
-                // remove the target object now covered by the correct box
                 objects.remove(boxDestObj);
                 boxDestObj.getImg().makeInvisible();
             } else {
-                // moving onto plain floor
+                // Posun na prázdne miesto
                 destObj.setObjectType(ObjectType.BOX);
             }
 
-            // If the box moved off a target, restore a BoxTarget at the old box position
+            // Obnov cieľovú pozíciu, ak bol box na nej
             if (boxWasOnTarget) {
                 GameObject restoredTarget = new GameObject(newPos.getX(), newPos.getY(),
-                        ObjectType.BOX_TARGET, gameController.getBoxSize());
+                        ObjectType.BOX_TARGET);
                 restoredTarget.getImg().makeVisible();
                 objects.add(restoredTarget);
             }
 
-            // Finally move the player into the box's old position
+            // Nakoniec posun hráča
             finalizePlayerMove(newPos, playerObj);
         }
     }
 
     private void finalizePlayerMove(Position newPos, GameObject playerObj) {
         playerObj.setPosition(newPos);
-        // ensure player's image is refreshed if needed
+        // Refresh obrázok hráča
         playerObj.getImg().makeInvisible();
         playerObj.getImg().makeVisible();
         gameController.drawGround();

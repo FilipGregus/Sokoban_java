@@ -10,7 +10,6 @@ import fri.shapesge.ImageData;
 public class GameObject {
     private Position position;
     private ObjectType objectType;
-    private final int boxSize;
 
     private Image img;
 
@@ -19,11 +18,10 @@ public class GameObject {
      * @param x
      * @param y
      * @param objectType
-     * @param boxSize
      */
 
-    public GameObject(int x, int y, ObjectType objectType, int boxSize) {
-        this.boxSize = boxSize;
+    public GameObject(int x, int y, ObjectType objectType) {
+
         this.position = new Position(x, y);
         this.objectType = objectType;
         this.setImg(objectType.getImageData());
@@ -47,7 +45,7 @@ public class GameObject {
 
     public void setPosition(Position position) {
         this.position = position;
-        this.img.changePosition(position.getX() * boxSize, position.getY() * boxSize);
+        this.img.changePosition(position.getX() * GameController.getBoxSize(), position.getY() * GameController.getBoxSize());
     }
 
     /**
@@ -78,7 +76,7 @@ public class GameObject {
 
     private void setImg(ImageData img) {
         if(this.img == null) {
-            this.img= new Image(img, this.position.getX() * boxSize, this.position.getY() * boxSize);
+            this.img= new Image(img, this.position.getX() * GameController.getBoxSize(), this.position.getY() * GameController.getBoxSize());
             return;
         }
 

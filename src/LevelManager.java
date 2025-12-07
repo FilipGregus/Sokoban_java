@@ -4,16 +4,29 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * Trieda LevelManager riadi načítanie úrovní zo súborov
+ *
+ * @author Filip Greguš
+ * @version 1.0
+ */
+
 public class LevelManager {
     private final String pathToLevels;
     private int actualColumns = 0;
     private int actualRows = 0;
-    private final int boxSize;
 
-    public LevelManager(String pathToLevels, int boxSize) {
+    public LevelManager(String pathToLevels) {
         this.pathToLevels = pathToLevels;
-        this.boxSize = boxSize;
     }
+
+    /**
+     * Metóda pre načítanie úrovne zo súboru
+     *
+     * @param levelNumber číslo úrovne na načítanie
+     * @return zoznam načítaných herných objektov
+     * @author Filip Greguš
+     */
 
     public ArrayList<GameObject> loadLevel(int levelNumber) {
         ArrayList<GameObject> loadedObjects = new ArrayList<>();
@@ -44,7 +57,7 @@ public class LevelManager {
                     default -> null;
                 };
                 if (type != null) {
-                    loadedObjects.add(new GameObject(j, i, type, this.boxSize) );
+                    loadedObjects.add(new GameObject(j, i, type) );
                 }
             }
         }
@@ -52,8 +65,24 @@ public class LevelManager {
         return loadedObjects;
     }
 
+    /**
+     * Metóda na získanie počtu stĺpcov v aktuálnej úrovni
+     * @author Filip Greguš
+     */
+
     public int getActualColumns() { return actualColumns; }
+
+    /**
+     * Metóda na získanie počtu riadkov v aktuálnej úrovni
+     * @author Filip Greguš
+     */
+
     public int getActualRows() { return actualRows; }
+
+    /**
+     * Metóda na získanie počtu dostupných úrovní
+     * @author Filip Greguš
+     */
 
     public int getLevelsCount() {
         File folder = new File(pathToLevels);
