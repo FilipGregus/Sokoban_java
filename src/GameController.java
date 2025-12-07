@@ -61,24 +61,23 @@ public class GameController {
         for (GameObject load : loadedObjects) {
             GameObject obj = null;
             switch (load.getObjectType()) {
-                case PLAYER -> {
+                case PLAYER:
                     obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.PLAYER);
                     this.player = new Player(obj, this);
-                    // player will be managed by Player wrapper; don't add yet
-                }
-                case WALL -> {
+                    break;
+                case WALL:
                     obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.WALL);
-                }
+                    break;
 
-                case BOX -> {
+                case BOX:
                     obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.BOX);
-                }
-                case CORRECT_BOX -> {
+                    break;
+                case CORRECT_BOX:
                     obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.CORRECT_BOX);
-                }
-                case BOX_TARGET -> {
+                    break;
+                case BOX_TARGET:
                     obj = new GameObject(load.getPosition().getX(), load.getPosition().getY(), ObjectType.BOX_TARGET);
-                }
+                    break;
             }
             if (obj != null && obj.getObjectType() != ObjectType.PLAYER) {
                 obj.getImg().makeVisible();
@@ -155,6 +154,7 @@ public class GameController {
 
     /**
      * Gettery pre aktuálny počet stĺpcov úrovne
+     *
      * @return aktuálny počet stĺpcov úrovne
      * @author Filip Greguš
      */

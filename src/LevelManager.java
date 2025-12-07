@@ -38,7 +38,7 @@ public class LevelManager {
             System.err.println("Error: " + e.getMessage());
         }
 
-        if( scanner != null) {
+        if (scanner != null) {
             actualColumns = scanner.nextInt();
             actualRows = scanner.nextInt();
             scanner.nextLine();
@@ -48,16 +48,29 @@ public class LevelManager {
             String line = scanner.nextLine();
             for (int j = 0; j < actualColumns; j++) {
                 char ch = line.charAt(j);
-                ObjectType type = switch (ch) {
-                    case 'P' -> ObjectType.PLAYER;
-                    case 'X' -> ObjectType.WALL;
-                    case 'B' -> ObjectType.BOX;
-                    case 'C' -> ObjectType.CORRECT_BOX;
-                    case 'O' -> ObjectType.BOX_TARGET;
-                    default -> null;
+                ObjectType type;
+                switch (ch) {
+                    case 'P':
+                        type = ObjectType.PLAYER;
+                        break;
+                    case 'X':
+                        type = ObjectType.WALL;
+                        break;
+                    case 'B':
+                        type = ObjectType.BOX;
+                        break;
+                    case 'C':
+                        type = ObjectType.CORRECT_BOX;
+                        break;
+                    case 'O':
+                        type = ObjectType.BOX_TARGET;
+                        break;
+                    default:
+                        type = null;
                 };
+
                 if (type != null) {
-                    loadedObjects.add(new GameObject(j, i, type) );
+                    loadedObjects.add(new GameObject(j, i, type));
                 }
             }
         }
@@ -67,20 +80,27 @@ public class LevelManager {
 
     /**
      * Metóda na získanie počtu stĺpcov v aktuálnej úrovni
+     *
      * @author Filip Greguš
      */
 
-    public int getActualColumns() { return actualColumns; }
+    public int getActualColumns() {
+        return actualColumns;
+    }
 
     /**
      * Metóda na získanie počtu riadkov v aktuálnej úrovni
+     *
      * @author Filip Greguš
      */
 
-    public int getActualRows() { return actualRows; }
+    public int getActualRows() {
+        return actualRows;
+    }
 
     /**
      * Metóda na získanie počtu dostupných úrovní
+     *
      * @author Filip Greguš
      */
 
