@@ -9,9 +9,11 @@ import java.util.ArrayList;
 
 public class Movement {
     private final GameController gameController;
+    private final SoundManager soundManager;
 
     public Movement(GameController gameController) {
         this.gameController = gameController;
+        this.soundManager = SoundManager.getInstance();
     }
 
     public void makeMove(int deltaX, int deltaY, Player player) {
@@ -76,6 +78,7 @@ public class Movement {
     }
 
     private void finalizePlayerMove(Position newPos, GameObject playerObj) {
+        this.soundManager.PlayStepSound();
         playerObj.setPosition(newPos);
         // Refresh obrázok hráča
         playerObj.getImg().makeInvisible();
