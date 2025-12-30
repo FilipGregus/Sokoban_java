@@ -34,7 +34,7 @@ public class MessageBox {
      * @return int - vráti index zvolenej možnosti
      */
 
-    public static int showRestartDialog() {
+    public static int showRestartCompleteDialog() {
         String[] options = {"Reštartovať", "Ukončiť"};
         return JOptionPane.showOptionDialog(
                 null,
@@ -42,6 +42,26 @@ public class MessageBox {
                 "Gratulujem!",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.INFORMATION_MESSAGE,
+                null,
+                options,
+                options[0]
+        );
+    }
+
+    /**
+     * Zobrazí dialógové okno na potvrdenie reštartu úrovne
+     * @author Filip Greguš
+     * @return int - vráti index zvolenej možnosti
+     */
+
+    public static int showRestartDialog() {
+        String[] options = {"Reštartovať", "Ukončiť"};
+        return JOptionPane.showOptionDialog(
+                null,
+                "Naozaj chceš reštartovať úroveň?",
+                "Reštartovať úroveň",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.WARNING_MESSAGE,
                 null,
                 options,
                 options[0]

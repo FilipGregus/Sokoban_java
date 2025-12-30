@@ -237,7 +237,7 @@ public class GameController {
                 timer = new javax.swing.Timer(120, e -> {
                     ((javax.swing.Timer) e.getSource()).stop();
 
-                    int choice = MessageBox.showRestartDialog();
+                    int choice = MessageBox.showRestartCompleteDialog();
 
                     if (choice == 0) { // Continue
                         clearBoard();
@@ -252,6 +252,25 @@ public class GameController {
             timer.setRepeats(false);
             timer.start();
         }
+    }
+
+    public void cancel(){
+        javax.swing.Timer timer;
+        timer = new javax.swing.Timer(120, e -> {
+            ((javax.swing.Timer) e.getSource()).stop();
+
+            int choice = MessageBox.showRestartDialog();
+
+            if (choice == 0) { // Restart level
+                clearBoard();
+                this.gameObjects = loadBoard(currentLevel);
+                drawGround();
+            } else { // Close or dialog closed
+                System.exit(0);
+            }
+        });
+        timer.setRepeats(false);
+        timer.start();
     }
 
     /**
