@@ -1,5 +1,11 @@
 import fri.shapesge.SoundEffect;
 
+/**
+ * Singleton trieda na spravu zvukovych efektov v hre.
+ * @author Filip Greguš
+ * @version 1.0
+ */
+
 public class SoundManager {
     private static SoundManager instance;
     private final SoundEffect stepSound1 = new SoundEffect("src/sounds/st1.wav");
@@ -8,12 +14,23 @@ public class SoundManager {
     private SoundManager() {
     }
 
+    /**
+     * Získanie inštancie SoundManageru.
+     * @return inštancia SoundManageru
+     * @author Filip Greguš
+     */
+
     public static SoundManager getInstance() {
         if (instance == null) {
             instance = new SoundManager();
         }
         return instance;
     }
+
+    /**
+     * Prehrávanie náhodného zvukového efektu kroku.
+     * @author Filip Greguš
+     */
 
     public void PlayStepSound() {
         double random = Math.random();
