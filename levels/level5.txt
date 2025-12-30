@@ -1,10 +1,12 @@
-9 9
-XXXXXXXXX
-X O   O X
-X BBB   X
-X  XX   X
-X P     X
-X   XX  X
-X   O   X
-X       X
-XXXXXXXXX
+10 10
+XXXXXXXXXX
+XO X X  OX
+X    B   X
+X XX XX XX
+X  B B   X
+X  XPX   X
+X   B    X
+X XX   XXX
+XO  X   OX
+XXXXXXXXXX
+
