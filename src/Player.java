@@ -1,3 +1,9 @@
+/**
+ * Trieda Player reprezentuje hráča v hre a poskytuje metódy na jeho pohyb
+ * @author Filip Greguš
+ * @version 1.0
+ */
+
 public class Player {
     private final GameObject playerObject;
     private final GameController gameController;
