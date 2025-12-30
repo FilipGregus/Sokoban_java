@@ -1,6 +1,4 @@
-import fri.shapesge.ImageData;
-import fri.shapesge.Manager;
-import fri.shapesge.Image;
+import fri.shapesge.*;
 
 import java.util.ArrayList;
 
@@ -20,8 +18,11 @@ public class GameController {
     private Player player;
     private int currentLevel;
     private final int levelsCount;
+    private final TextBlock t;
 
     private static final int BOX_SIZE = 50;
+    private static final int INTENT_X = 0;
+    private static final int INTENT_Y = 40;
 
     /**
      * Konštruktor triedy GameController inicializuje herný manažér, načíta úroveň a vykreslí hru
@@ -43,6 +44,9 @@ public class GameController {
         this.gameObjects = loadBoard(currentLevel);
         drawGround();
         this.levelsCount = this.levelManager.getLevelsCount();
+
+        this.t = new TextBlock("Level " + currentLevel);
+        showLevelInfo();
     }
 
     /**
@@ -112,7 +116,7 @@ public class GameController {
                 }
 
                 if (isEmpty) {
-                    Image ground = new Image(groundImgData, x * BOX_SIZE, y * BOX_SIZE);
+                    Image ground = new Image(groundImgData, x * BOX_SIZE + INTENT_X, y * BOX_SIZE + INTENT_Y);
                     ground.makeVisible();
                     grounds.add(ground);
                 }
@@ -175,6 +179,26 @@ public class GameController {
     }
 
     /**
+     * Getter pre odsadenie X
+     *
+     * @return odsadenie X
+     * @author Filip Greguš
+     */
+    public static int getIntentX() {
+        return INTENT_X;
+    }
+
+    /**
+     * Getter pre odsadenie Y
+     *
+     * @return odsadenie Y
+     * @author Filip Greguš
+     */
+    public static int getIntentY() {
+        return INTENT_Y;
+    }
+
+    /**
      * Metóda na kontrolu výhry
      *
      * @author Filip Greguš
@@ -204,6 +228,7 @@ public class GameController {
                         currentLevel++;
                         this.gameObjects = loadBoard(currentLevel);
                         drawGround();
+                        showLevelInfo();
                     } else { // Close or dialog closed
                         System.exit(0);
                     }
@@ -246,5 +271,13 @@ public class GameController {
             player = null;
         }
         this.gameObjects.clear();
+    }
+
+    private void showLevelInfo(){
+        t.makeInvisible();
+        t.changeText("Level " + this.currentLevel);
+        t.changeFont("Serif", FontStyle.BOLD, 30);
+        t.changePosition(200,25);
+        t.makeVisible();
     }
 }

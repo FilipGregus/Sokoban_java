@@ -3,6 +3,7 @@ import fri.shapesge.ImageData;
 
 /**
  * Trieda reprezentujúca herný objekt v hre
+ *
  * @author Filip Greguš
  * @version 1.0
  */
@@ -15,6 +16,7 @@ public class GameObject {
 
     /**
      * Konštruktor triedy GameObject inicializuje herný objekt s danou pozíciou, typom a veľkosťou boxu
+     *
      * @param x
      * @param y
      * @param objectType
@@ -29,6 +31,7 @@ public class GameObject {
 
     /**
      * Získanie pozície herného objektu
+     *
      * @return pozícia herného objektu
      * @author Filip Greguš
      */
@@ -39,17 +42,19 @@ public class GameObject {
 
     /**
      * Nastavenie pozície herného objektu
+     *
      * @param position nová pozícia herného objektu
      * @author Filip Greguš
      */
 
     public void setPosition(Position position) {
         this.position = position;
-        this.img.changePosition(position.getX() * GameController.getBoxSize(), position.getY() * GameController.getBoxSize());
+        this.img.changePosition(position.getX() * GameController.getBoxSize() + GameController.getIntentX(), position.getY() * GameController.getBoxSize() + GameController.getIntentY());
     }
 
     /**
      * Získanie typu herného objektu
+     *
      * @return typ herného objektu
      * @author Filip Greguš
      */
@@ -60,6 +65,7 @@ public class GameObject {
 
     /**
      * Získanie obrázku herného objektu
+     *
      * @return obrázok herného objektu
      * @author Filip Greguš
      */
@@ -70,13 +76,14 @@ public class GameObject {
 
     /**
      * Nastavenie obrázku herného objektu
+     *
      * @param img nový obrázok herného objektu
      * @author Filip Greguš
      */
 
     private void setImg(ImageData img) {
-        if(this.img == null) {
-            this.img= new Image(img, this.position.getX() * GameController.getBoxSize(), this.position.getY() * GameController.getBoxSize());
+        if (this.img == null) {
+            this.img = new Image(img, position.getX() * GameController.getBoxSize() + GameController.getIntentX(), position.getY() * GameController.getBoxSize() + GameController.getIntentY());
             return;
         }
 
@@ -85,6 +92,7 @@ public class GameObject {
 
     /**
      * Nastavenie typu herného objektu
+     *
      * @param objectType nový typ herného objektu
      * @author Filip Greguš
      */
