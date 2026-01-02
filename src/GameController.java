@@ -254,7 +254,7 @@ public class GameController {
         }
     }
 
-    public void cancel(){
+    public void cancel() {
         javax.swing.Timer timer;
         timer = new javax.swing.Timer(120, e -> {
             ((javax.swing.Timer) e.getSource()).stop();
@@ -273,12 +273,6 @@ public class GameController {
         timer.start();
     }
 
-    /**
-     * Metóda na vyčistenie hernej plochy
-     *
-     * @author Filip Greguš
-     */
-
     private void clearBoard() {
         for (GameObject obj : gameObjects) {
             if (obj.getImg() != null) obj.getImg().makeInvisible();
@@ -292,11 +286,11 @@ public class GameController {
         this.gameObjects.clear();
     }
 
-    private void showLevelInfo(){
+    private void showLevelInfo() {
         t.makeInvisible();
         t.changeText("Level " + this.currentLevel);
         t.changeFont("Serif", FontStyle.BOLD, 30);
-        t.changePosition(200,25);
+        t.changePosition(200, 25);
         t.makeVisible();
     }
 }

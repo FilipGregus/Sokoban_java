@@ -1,5 +1,6 @@
 /**
  * Trieda Player reprezentuje hráča v hre a poskytuje metódy na jeho pohyb
+ *
  * @author Filip Greguš
  * @version 1.0
  */
@@ -11,7 +12,8 @@ public class Player {
 
     /**
      * Konštruktor triedy Player inicializuje hráča s daným herným objektom a herným kontrolérom
-     * @param playerObject herný objekt reprezentujúci hráča
+     *
+     * @param playerObject   herný objekt reprezentujúci hráča
      * @param gameController herný kontrolér riadiaci logiku hry
      * @author Filip Greguš
      */
@@ -26,6 +28,7 @@ public class Player {
 
     /**
      * Získanie herného objektu reprezentujúceho hráča
+     *
      * @return herný objekt reprezentujúci hráča
      * @author Filip Greguš
      */
@@ -36,6 +39,7 @@ public class Player {
 
     /**
      * Metóda na pohyb hráča smerom dole
+     *
      * @author Filip Greguš
      */
 
@@ -46,6 +50,7 @@ public class Player {
 
     /**
      * Metóda na pohyb hráča smerom hore
+     *
      * @author Filip Greguš
      */
 
@@ -56,6 +61,7 @@ public class Player {
 
     /**
      * Metóda na pohyb hráča smerom doľava
+     *
      * @author Filip Greguš
      */
 
@@ -66,6 +72,7 @@ public class Player {
 
     /**
      * Metóda na pohyb hráča smerom doprava
+     *
      * @author Filip Greguš
      */
 

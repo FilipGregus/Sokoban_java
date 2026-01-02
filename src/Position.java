@@ -1,6 +1,18 @@
+/**
+ * Trieda reprezentujúca pozíciu na hernej ploche
+ */
+
 public class Position {
     private int x;
     private int y;
+
+    /**
+     * Konštruktor triedy Position inicializuje pozíciu s danými súradnicami
+     *
+     * @param x x-ová súradnica
+     * @param y y-ová súradnica
+     * @author Filip Greguš
+     */
 
     public Position(int x, int y) {
         this.x = x;
@@ -10,6 +22,7 @@ public class Position {
     public int getX() {
         return x;
     }
+
     public int getY() {
         return y;
     }

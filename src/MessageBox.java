@@ -2,6 +2,7 @@ import javax.swing.JOptionPane;
 
 /**
  * Trieda na zobrazovanie dialógových okien
+ *
  * @author Filip Greguš
  * @version 1.0
  */
@@ -10,8 +11,9 @@ public class MessageBox {
 
     /**
      * Zobrazí dialógové okno po dokončení úrovne
-     * @author Filip Greguš
+     *
      * @return int - vráti index zvolenej možnosti
+     * @author Filip Greguš
      */
 
     public static int showNextLevelDialog() {
@@ -30,8 +32,9 @@ public class MessageBox {
 
     /**
      * Zobrazí dialógové okno po dokončení všetkých úrovní
-     * @author Filip Greguš
+     *
      * @return int - vráti index zvolenej možnosti
+     * @author Filip Greguš
      */
 
     public static int showRestartCompleteDialog() {
@@ -50,8 +53,9 @@ public class MessageBox {
 
     /**
      * Zobrazí dialógové okno na potvrdenie reštartu úrovne
-     * @author Filip Greguš
+     *
      * @return int - vráti index zvolenej možnosti
+     * @author Filip Greguš
      */
 
     public static int showRestartDialog() {

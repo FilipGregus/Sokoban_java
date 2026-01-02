@@ -11,10 +11,26 @@ public class Movement {
     private final GameController gameController;
     private final SoundManager soundManager;
 
+    /**
+     * Konštruktor triedy Movement inicializuje pohybový manažér s odkazom na herný kontrolér
+     *
+     * @param gameController inštancia herného kontroléra
+     * @author Filip Greguš
+     */
+
     public Movement(GameController gameController) {
         this.gameController = gameController;
         this.soundManager = SoundManager.getInstance();
     }
+
+    /**
+     * Metóda na vykonanie pohybu hráča
+     *
+     * @param deltaX zmena v x-ovej súradnici
+     * @param deltaY zmena v y-ovej súradnici
+     * @param player inštancia hráča
+     * @author Filip Greguš
+     */
 
     public void makeMove(int deltaX, int deltaY, Player player) {
         GameObject playerObj = player.getPlayerObject();
@@ -27,7 +43,6 @@ public class Movement {
 
         ArrayList<GameObject> objects = gameController.getGameObjects();
         GameObject destObj = getObjectAtPosition(newPos, objects);
-
 
 
         // Pokiaľ je cielova pozícia prázdna môže sa posunúť

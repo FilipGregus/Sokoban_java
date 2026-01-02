@@ -2,6 +2,7 @@ import fri.shapesge.SoundEffect;
 
 /**
  * Singleton trieda na spravu zvukovych efektov v hre.
+ *
  * @author Filip Greguš
  * @version 1.0
  */
@@ -16,6 +17,7 @@ public class SoundManager {
 
     /**
      * Získanie inštancie SoundManageru.
+     *
      * @return inštancia SoundManageru
      * @author Filip Greguš
      */
@@ -29,6 +31,7 @@ public class SoundManager {
 
     /**
      * Prehrávanie náhodného zvukového efektu kroku.
+     *
      * @author Filip Greguš
      */
 

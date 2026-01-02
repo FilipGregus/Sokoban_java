@@ -17,9 +17,10 @@ public class GameObject {
     /**
      * Konštruktor triedy GameObject inicializuje herný objekt s danou pozíciou, typom a veľkosťou boxu
      *
-     * @param x
-     * @param y
-     * @param objectType
+     * @param x          x-ová súradnica herného objektu
+     * @param y          y-ová súradnica herného objektu
+     * @param objectType typ herného objektu
+     * @author Filip Greguš
      */
 
     public GameObject(int x, int y, ObjectType objectType) {

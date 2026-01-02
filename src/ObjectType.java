@@ -1,7 +1,13 @@
 import fri.shapesge.ImageData;
 
-public enum  ObjectType
-{
+/**
+ * Enum typ reprezentujúci rôzne typy herných objektov
+ *
+ * @author Filip Greguš
+ * @version 1.0
+ */
+
+public enum ObjectType {
     PLAYER(new ImageData("src/icons/player.png")),
     WALL(new ImageData("src/icons/wall.png")),
     BOX(new ImageData("src/icons/box.png")),
@@ -10,11 +16,18 @@ public enum  ObjectType
 
     private final ImageData imageData;
 
-    ObjectType(ImageData imageData){
+    ObjectType(ImageData imageData) {
         this.imageData = imageData;
     }
 
-    public ImageData getImageData(){
+    /**
+     * Získanie obrázku pre daný typ objektu
+     *
+     * @return ImageData objektu
+     * @author Filip Greguš
+     */
+
+    public ImageData getImageData() {
         return this.imageData;
     }
 }

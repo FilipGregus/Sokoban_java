@@ -67,7 +67,8 @@ public class LevelManager {
                         break;
                     default:
                         type = null;
-                };
+                }
+                ;
 
                 if (type != null) {
                     loadedObjects.add(new GameObject(j, i, type));
