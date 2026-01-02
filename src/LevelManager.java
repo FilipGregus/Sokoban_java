@@ -5,9 +5,9 @@ import java.util.Objects;
 import java.util.Scanner;
 
 /**
- * Trieda LevelManager riadi načítanie úrovní zo súborov
+ * Trieda LevelManager riadi nacitanie urovni zo suborov
  *
- * @author Filip Greguš
+ * @author Filip Gregus
  * @version 1.0
  */
 
@@ -21,11 +21,11 @@ public class LevelManager {
     }
 
     /**
-     * Metóda pre načítanie úrovne zo súboru
+     * Metoda pre nacitanie urovne zo suboru
      *
-     * @param levelNumber číslo úrovne na načítanie
-     * @return zoznam načítaných herných objektov
-     * @author Filip Greguš
+     * @param levelNumber cislo urovne na nacitanie
+     * @return zoznam nacitanych hernych objektov
+     * @author Filip Gregus
      */
 
     public ArrayList<GameObject> loadLevel(int levelNumber) {
@@ -79,9 +79,9 @@ public class LevelManager {
     }
 
     /**
-     * Metóda na získanie počtu stĺpcov v aktuálnej úrovni
+     * Metoda na ziskanie poctu stlpcov v aktualnej urovni
      *
-     * @author Filip Greguš
+     * @author Filip Gregus
      */
 
     public int getActualColumns() {
@@ -89,9 +89,9 @@ public class LevelManager {
     }
 
     /**
-     * Metóda na získanie počtu riadkov v aktuálnej úrovni
+     * Metoda na ziskanie poctu riadkov v aktualnej urovni
      *
-     * @author Filip Greguš
+     * @author Filip Gregus
      */
 
     public int getActualRows() {
@@ -99,9 +99,9 @@ public class LevelManager {
     }
 
     /**
-     * Metóda na získanie počtu dostupných úrovní
+     * Metoda na ziskanie poctu dostupnych urovni
      *
-     * @author Filip Greguš
+     * @author Filip Gregus
      */
 
     public int getLevelsCount() {

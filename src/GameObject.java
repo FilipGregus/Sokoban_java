@@ -2,9 +2,9 @@ import fri.shapesge.Image;
 import fri.shapesge.ImageData;
 
 /**
- * Trieda reprezentujúca herný objekt v hre
+ * Trieda reprezentujuca herny objekt v hre
  *
- * @author Filip Greguš
+ * @author Filip Gregus
  * @version 1.0
  */
 
@@ -15,12 +15,12 @@ public class GameObject {
     private Image img;
 
     /**
-     * Konštruktor triedy GameObject inicializuje herný objekt s danou pozíciou, typom a veľkosťou boxu
+     * Konstruktor triedy GameObject inicializuje herny objekt s danou poziciou, typom a velkostou boxu
      *
-     * @param x          x-ová súradnica herného objektu
-     * @param y          y-ová súradnica herného objektu
-     * @param objectType typ herného objektu
-     * @author Filip Greguš
+     * @param x          x-ova suradnica herneho objektu
+     * @param y          y-ova suradnica herneho objektu
+     * @param objectType typ herneho objektu
+     * @author Filip Gregus
      */
 
     public GameObject(int x, int y, ObjectType objectType) {
@@ -31,10 +31,10 @@ public class GameObject {
     }
 
     /**
-     * Získanie pozície herného objektu
+     * Ziskanie pozicie herneho objektu
      *
-     * @return pozícia herného objektu
-     * @author Filip Greguš
+     * @return pozicia herneho objektu
+     * @author Filip Gregus
      */
 
     public Position getPosition() {
@@ -42,10 +42,10 @@ public class GameObject {
     }
 
     /**
-     * Nastavenie pozície herného objektu
+     * Nastavenie pozicie herneho objektu
      *
-     * @param position nová pozícia herného objektu
-     * @author Filip Greguš
+     * @param position nova pozicia herneho objektu
+     * @author Filip Gregus
      */
 
     public void setPosition(Position position) {
@@ -54,10 +54,10 @@ public class GameObject {
     }
 
     /**
-     * Získanie typu herného objektu
+     * Ziskanie typu herneho objektu
      *
-     * @return typ herného objektu
-     * @author Filip Greguš
+     * @return typ herneho objektu
+     * @author Filip Gregus
      */
 
     public ObjectType getObjectType() {
@@ -65,10 +65,10 @@ public class GameObject {
     }
 
     /**
-     * Získanie obrázku herného objektu
+     * Ziskanie obrazku herneho objektu
      *
-     * @return obrázok herného objektu
-     * @author Filip Greguš
+     * @return obrazok herneho objektu
+     * @author Filip Gregus
      */
 
     public Image getImg() {
@@ -76,10 +76,10 @@ public class GameObject {
     }
 
     /**
-     * Nastavenie obrázku herného objektu
+     * Nastavenie obrazku herneho objektu
      *
-     * @param img nový obrázok herného objektu
-     * @author Filip Greguš
+     * @param img novy obrazok herneho objektu
+     * @author Filip Gregus
      */
 
     private void setImg(ImageData img) {
@@ -92,10 +92,10 @@ public class GameObject {
     }
 
     /**
-     * Nastavenie typu herného objektu
+     * Nastavenie typu herneho objektu
      *
-     * @param objectType nový typ herného objektu
-     * @author Filip Greguš
+     * @param objectType novy typ herneho objektu
+     * @author Filip Gregus
      */
 
     public void setObjectType(ObjectType objectType) {

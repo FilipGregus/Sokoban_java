@@ -1,9 +1,9 @@
 import fri.shapesge.ImageData;
 
 /**
- * Enum typ reprezentujúci rôzne typy herných objektov
+ * Enum typ reprezentujuci rozne typy hernych objektov
  *
- * @author Filip Greguš
+ * @author Filip Gregus
  * @version 1.0
  */
 
@@ -21,10 +21,10 @@ public enum ObjectType {
     }
 
     /**
-     * Získanie obrázku pre daný typ objektu
+     * Ziskanie obrazku pre dany typ objektu
      *
      * @return ImageData objektu
-     * @author Filip Greguš
+     * @author Filip Gregus
      */
 
     public ImageData getImageData() {

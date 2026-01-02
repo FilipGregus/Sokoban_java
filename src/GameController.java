@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Trieda GameController riadi logiku hry
  *
- * @author Filip Greguš
+ * @author Filip Gregus
  * @version 1.0
  */
 
@@ -29,9 +29,9 @@ public class GameController {
     private static final int INTENT_Y = 40;
 
     /**
-     * Konštruktor triedy GameController inicializuje herný manažér, načíta úroveň a vykreslí hru
+     * Konstruktor triedy GameController inicializuje herny manazer, nacita uroven a vykresli hru
      *
-     * @author Filip Greguš
+     * @author Filip Gregus
      */
 
     public GameController() {
@@ -54,11 +54,11 @@ public class GameController {
     }
 
     /**
-     * Metóda na načítanie hernej úrovne
+     * Metoda na nacitanie hernej urovne
      *
-     * @param levelNumber číslo úrovne na načítanie
-     * @return zoznam herných objektov načítaných z úrovne
-     * @author Filip Greguš
+     * @param levelNumber cislo urovne na nacitanie
+     * @return zoznam hernych objektov nacitanych z urovne
+     * @author Filip Gregus
      */
 
     private ArrayList<GameObject> loadBoard(int levelNumber) {
@@ -98,9 +98,9 @@ public class GameController {
 
 
     /**
-     * Metóda na vykreslenie prázdnych políčok plochy
+     * Metoda na vykreslenie prazdnych policok plochy
      *
-     * @author Filip Greguš
+     * @author Filip Gregus
      */
 
     public void drawGround() {
@@ -129,9 +129,9 @@ public class GameController {
     }
 
     /**
-     * Gettery pre herné objekty
+     * Gettery pre herne objekty
      *
-     * @author Filip Greguš
+     * @author Filip Gregus
      */
 
     public ArrayList<GameObject> getGameObjects() {
@@ -139,10 +139,10 @@ public class GameController {
     }
 
     /**
-     * Getter pre herného manažéra
+     * Getter pre herneho manazera
      *
-     * @return herný manažér
-     * @author Filip Greguš
+     * @return herny manazer
+     * @author Filip Gregus
      */
 
     public static Manager getGameManager() {
@@ -150,10 +150,10 @@ public class GameController {
     }
 
     /**
-     * Gettery pre aktuálny počet riadkov úrovne
+     * Gettery pre aktualny pocet riadkov urovne
      *
-     * @return aktuálny počet riadkov úrovne
-     * @author Filip Greguš
+     * @return aktualny pocet riadkov urovne
+     * @author Filip Gregus
      */
 
     public int getActualLevelRows() {
@@ -161,10 +161,10 @@ public class GameController {
     }
 
     /**
-     * Gettery pre aktuálny počet stĺpcov úrovne
+     * Gettery pre aktualny pocet stlpcov urovne
      *
-     * @return aktuálny počet stĺpcov úrovne
-     * @author Filip Greguš
+     * @return aktualny pocet stlpcov urovne
+     * @author Filip Gregus
      */
 
     public int getActualLevelColumns() {
@@ -172,10 +172,10 @@ public class GameController {
     }
 
     /**
-     * Getter pre veľkosť boxu
+     * Getter pre velkost boxu
      *
-     * @return veľkosť boxu
-     * @author Filip Greguš
+     * @return velkost boxu
+     * @author Filip Gregus
      */
 
     public static int getBoxSize() {
@@ -186,7 +186,7 @@ public class GameController {
      * Getter pre odsadenie X
      *
      * @return odsadenie X
-     * @author Filip Greguš
+     * @author Filip Gregus
      */
     public static int getIntentX() {
         return INTENT_X;
@@ -196,16 +196,16 @@ public class GameController {
      * Getter pre odsadenie Y
      *
      * @return odsadenie Y
-     * @author Filip Greguš
+     * @author Filip Gregus
      */
     public static int getIntentY() {
         return INTENT_Y;
     }
 
     /**
-     * Metóda na kontrolu výhry
+     * Metoda na kontrolu vyhry
      *
-     * @author Filip Greguš
+     * @author Filip Gregus
      */
 
     public void checkWin() {

@@ -1,27 +1,27 @@
 import javax.swing.JOptionPane;
 
 /**
- * Trieda na zobrazovanie dialógových okien
+ * Trieda na zobrazovanie dialogovych okien
  *
- * @author Filip Greguš
+ * @author Filip Gregus
  * @version 1.0
  */
 
 public class MessageBox {
 
     /**
-     * Zobrazí dialógové okno po dokončení úrovne
+     * Zobrazi dialogove okno po dokonceni urovne
      *
-     * @return int - vráti index zvolenej možnosti
-     * @author Filip Greguš
+     * @return int - vrati index zvolenej moznosti
+     * @author Filip Gregus
      */
 
     public static int showNextLevelDialog() {
-        String[] options = {"Pokračovať", "Ukončiť"};
+        String[] options = {"Pokracovat", "Ukoncit"};
         return JOptionPane.showOptionDialog(
                 null,
-                "Gratulujem! Chceš pokračovať na ďalšiu úroveň?",
-                "Úroveň dokončená",
+                "Gratulujem! Chces pokracovat na dalsiu uroven?",
+                "Uroven dokoncena",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.INFORMATION_MESSAGE,
                 null,
@@ -31,17 +31,17 @@ public class MessageBox {
     }
 
     /**
-     * Zobrazí dialógové okno po dokončení všetkých úrovní
+     * Zobrazi dialogove okno po dokonceni vsetkych urovni
      *
-     * @return int - vráti index zvolenej možnosti
-     * @author Filip Greguš
+     * @return int - vrati index zvolenej moznosti
+     * @author Filip Gregus
      */
 
     public static int showRestartCompleteDialog() {
-        String[] options = {"Reštartovať", "Ukončiť"};
+        String[] options = {"Restartovat", "Ukoncit"};
         return JOptionPane.showOptionDialog(
                 null,
-                "Vyhral si všetky levely! Chceš pokračovať odznova?",
+                "Vyhral si vsetky levely! Chces pokracovat odznova?",
                 "Gratulujem!",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.INFORMATION_MESSAGE,
@@ -52,18 +52,18 @@ public class MessageBox {
     }
 
     /**
-     * Zobrazí dialógové okno na potvrdenie reštartu úrovne
+     * Zobrazi dialogove okno na potvrdenie restartu urovne
      *
-     * @return int - vráti index zvolenej možnosti
-     * @author Filip Greguš
+     * @return int - vrati index zvolenej moznosti
+     * @author Filip Gregus
      */
 
     public static int showRestartDialog() {
-        String[] options = {"Reštartovať", "Ukončiť"};
+        String[] options = {"Restartovat", "Ukoncit"};
         return JOptionPane.showOptionDialog(
                 null,
-                "Naozaj chceš reštartovať úroveň?",
-                "Reštartovať úroveň",
+                "Naozaj chces restartovat uroven?",
+                "Restartovat uroven",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.WARNING_MESSAGE,
                 null,

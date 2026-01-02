@@ -1,5 +1,5 @@
 /**
- * Trieda reprezentujúca pozíciu na hernej ploche
+ * Trieda reprezentujuca poziciu na hernej ploche
  */
 
 public class Position {
@@ -7,11 +7,11 @@ public class Position {
     private int y;
 
     /**
-     * Konštruktor triedy Position inicializuje pozíciu s danými súradnicami
+     * Konstruktor triedy Position inicializuje poziciu s danymi suradnicami
      *
-     * @param x x-ová súradnica
-     * @param y y-ová súradnica
-     * @author Filip Greguš
+     * @param x x-ova suradnica
+     * @param y y-ova suradnica
+     * @author Filip Gregus
      */
 
     public Position(int x, int y) {

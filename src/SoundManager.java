@@ -3,7 +3,7 @@ import fri.shapesge.SoundEffect;
 /**
  * Singleton trieda na spravu zvukovych efektov v hre.
  *
- * @author Filip Greguš
+ * @author Filip Gregus
  * @version 1.0
  */
 
@@ -16,10 +16,10 @@ public class SoundManager {
     }
 
     /**
-     * Získanie inštancie SoundManageru.
+     * Ziskanie instancie SoundManageru.
      *
-     * @return inštancia SoundManageru
-     * @author Filip Greguš
+     * @return instancia SoundManageru
+     * @author Filip Gregus
      */
 
     public static SoundManager getInstance() {
@@ -30,9 +30,9 @@ public class SoundManager {
     }
 
     /**
-     * Prehrávanie náhodného zvukového efektu kroku.
+     * Prehravanie nahodneho zvukoveho efektu kroku.
      *
-     * @author Filip Greguš
+     * @author Filip Gregus
      */
 
     public void playStepSound() {

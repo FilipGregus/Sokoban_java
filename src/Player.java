@@ -1,7 +1,7 @@
 /**
- * Trieda Player reprezentuje hráča v hre a poskytuje metódy na jeho pohyb
+ * Trieda Player reprezentuje hraca v hre a poskytuje metody na jeho pohyb
  *
- * @author Filip Greguš
+ * @author Filip Gregus
  * @version 1.0
  */
 
@@ -11,11 +11,11 @@ public class Player {
     private final Movement movement;
 
     /**
-     * Konštruktor triedy Player inicializuje hráča s daným herným objektom a herným kontrolérom
+     * Konstruktor triedy Player inicializuje hraca s danym hernym objektom a hernym kontrolerom
      *
-     * @param playerObject   herný objekt reprezentujúci hráča
-     * @param gameController herný kontrolér riadiaci logiku hry
-     * @author Filip Greguš
+     * @param playerObject   herny objekt reprezentujuci hraca
+     * @param gameController herny kontroler riadiaci logiku hry
+     * @author Filip Gregus
      */
 
     public Player(GameObject playerObject, GameController gameController) {
@@ -27,10 +27,10 @@ public class Player {
     }
 
     /**
-     * Získanie herného objektu reprezentujúceho hráča
+     * Ziskanie herneho objektu reprezentujuceho hraca
      *
-     * @return herný objekt reprezentujúci hráča
-     * @author Filip Greguš
+     * @return herny objekt reprezentujuci hraca
+     * @author Filip Gregus
      */
 
     public GameObject getPlayerObject() {
@@ -38,9 +38,9 @@ public class Player {
     }
 
     /**
-     * Metóda na pohyb hráča smerom dole
+     * Metoda na pohyb hraca smerom dole
      *
-     * @author Filip Greguš
+     * @author Filip Gregus
      */
 
     public void moveDown() {
@@ -49,9 +49,9 @@ public class Player {
     }
 
     /**
-     * Metóda na pohyb hráča smerom hore
+     * Metoda na pohyb hraca smerom hore
      *
-     * @author Filip Greguš
+     * @author Filip Gregus
      */
 
     public void moveUp() {
@@ -60,9 +60,9 @@ public class Player {
     }
 
     /**
-     * Metóda na pohyb hráča smerom doľava
+     * Metoda na pohyb hraca smerom dolava
      *
-     * @author Filip Greguš
+     * @author Filip Gregus
      */
 
     public void moveLeft() {
@@ -71,9 +71,9 @@ public class Player {
     }
 
     /**
-     * Metóda na pohyb hráča smerom doprava
+     * Metoda na pohyb hraca smerom doprava
      *
-     * @author Filip Greguš
+     * @author Filip Gregus
      */
 
     public void moveRight() {
