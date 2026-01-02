@@ -1,4 +1,8 @@
-import fri.shapesge.*;
+import fri.shapesge.Image;
+import fri.shapesge.TextBlock;
+import fri.shapesge.FontStyle;
+import fri.shapesge.ImageData;
+import fri.shapesge.Manager;
 
 import java.util.ArrayList;
 
@@ -41,12 +45,12 @@ public class GameController {
         this.levelManager = new LevelManager("./levels");
 
         this.currentLevel = 1;
-        this.gameObjects = loadBoard(currentLevel);
-        drawGround();
+        this.gameObjects = this.loadBoard(currentLevel);
+        this.drawGround();
         this.levelsCount = this.levelManager.getLevelsCount();
 
         this.t = new TextBlock("Level " + currentLevel);
-        showLevelInfo();
+        this.showLevelInfo();
     }
 
     /**
@@ -100,25 +104,25 @@ public class GameController {
      */
 
     public void drawGround() {
-        for (Image img : grounds) {
+        for (Image img : this.grounds) {
             img.makeInvisible();
         }
 
-        grounds.clear();
+        this.grounds.clear();
 
-        for (int y = 0; y < levelManager.getActualRows(); y++) {
-            for (int x = 0; x < levelManager.getActualColumns(); x++) {
+        for (int y = 0; y < this.levelManager.getActualRows(); y++) {
+            for (int x = 0; x < this.levelManager.getActualColumns(); x++) {
                 boolean isEmpty = true;
-                for (GameObject obj : gameObjects) {
+                for (GameObject obj : this.gameObjects) {
                     if (obj.getPosition().equals(new Position(x, y)) || this.player.getPlayerObject().getPosition().equals(new Position(x, y))) {
                         isEmpty = false;
                     }
                 }
 
                 if (isEmpty) {
-                    Image ground = new Image(groundImgData, x * BOX_SIZE + INTENT_X, y * BOX_SIZE + INTENT_Y);
+                    Image ground = new Image(this.groundImgData, x * BOX_SIZE + INTENT_X, y * BOX_SIZE + INTENT_Y);
                     ground.makeVisible();
-                    grounds.add(ground);
+                    this.grounds.add(ground);
                 }
             }
         }
@@ -131,7 +135,7 @@ public class GameController {
      */
 
     public ArrayList<GameObject> getGameObjects() {
-        return gameObjects;
+        return this.gameObjects;
     }
 
     /**
@@ -153,7 +157,7 @@ public class GameController {
      */
 
     public int getActualLevelRows() {
-        return levelManager.getActualRows();
+        return this.levelManager.getActualRows();
     }
 
     /**
@@ -164,7 +168,7 @@ public class GameController {
      */
 
     public int getActualLevelColumns() {
-        return levelManager.getActualColumns();
+        return this.levelManager.getActualColumns();
     }
 
     /**
@@ -207,7 +211,7 @@ public class GameController {
     public void checkWin() {
         boolean allBoxesOnTargets = true;
 
-        for (GameObject obj : gameObjects) {
+        for (GameObject obj : this.gameObjects) {
             if (obj.getObjectType() == ObjectType.BOX) {
                 allBoxesOnTargets = false;
                 break;
@@ -224,11 +228,11 @@ public class GameController {
                     int choice = MessageBox.showNextLevelDialog();
 
                     if (choice == 0) { // Continue
-                        clearBoard();
-                        currentLevel++;
+                        this.clearBoard();
+                        this.currentLevel++;
                         this.gameObjects = loadBoard(currentLevel);
-                        drawGround();
-                        showLevelInfo();
+                        this.drawGround();
+                        this.showLevelInfo();
                     } else { // Close or dialog closed
                         System.exit(0);
                     }
@@ -240,10 +244,10 @@ public class GameController {
                     int choice = MessageBox.showRestartCompleteDialog();
 
                     if (choice == 0) { // Continue
-                        clearBoard();
-                        currentLevel = 1;
+                        this.clearBoard();
+                        this.currentLevel = 1;
                         this.gameObjects = loadBoard(currentLevel);
-                        drawGround();
+                        this.drawGround();
                     } else { // Close or dialog closed
                         System.exit(0);
                     }
@@ -262,9 +266,9 @@ public class GameController {
             int choice = MessageBox.showRestartDialog();
 
             if (choice == 0) { // Restart level
-                clearBoard();
+                this.clearBoard();
                 this.gameObjects = loadBoard(currentLevel);
-                drawGround();
+                this.drawGround();
             } else { // Close or dialog closed
                 System.exit(0);
             }
@@ -274,23 +278,25 @@ public class GameController {
     }
 
     private void clearBoard() {
-        for (GameObject obj : gameObjects) {
-            if (obj.getImg() != null) obj.getImg().makeInvisible();
+        for (GameObject obj : this.gameObjects) {
+            if (obj.getImg() != null) {
+                obj.getImg().makeInvisible();
+            }
         }
 
-        if (player != null && player.getPlayerObject() != null && player.getPlayerObject().getImg() != null) {
+        if (this.player != null && this.player.getPlayerObject() != null && this.player.getPlayerObject().getImg() != null) {
             player.getPlayerObject().getImg().makeInvisible();
             gameManager.stopManagingObject(this.player);
-            player = null;
+            this.player = null;
         }
         this.gameObjects.clear();
     }
 
     private void showLevelInfo() {
-        t.makeInvisible();
-        t.changeText("Level " + this.currentLevel);
-        t.changeFont("Serif", FontStyle.BOLD, 30);
-        t.changePosition(200, 25);
-        t.makeVisible();
+        this.t.makeInvisible();
+        this.t.changeText("Level " + this.currentLevel);
+        this.t.changeFont("Serif", FontStyle.BOLD, 30);
+        this.t.changePosition(200, 25);
+        this.t.makeVisible();
     }
 }

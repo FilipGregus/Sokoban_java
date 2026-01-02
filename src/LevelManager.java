@@ -32,15 +32,15 @@ public class LevelManager {
         ArrayList<GameObject> loadedObjects = new ArrayList<>();
         Scanner scanner = null;
         try {
-            File file = new File(pathToLevels + "/level" + levelNumber + ".txt");
+            File file = new File(this.pathToLevels + "/level" + levelNumber + ".txt");
             scanner = new Scanner(file);
         } catch (IOException e) {
             System.err.println("Error: " + e.getMessage());
         }
 
         if (scanner != null) {
-            actualColumns = scanner.nextInt();
-            actualRows = scanner.nextInt();
+            this.actualColumns = scanner.nextInt();
+            this.actualRows = scanner.nextInt();
             scanner.nextLine();
         }
 
@@ -68,7 +68,6 @@ public class LevelManager {
                     default:
                         type = null;
                 }
-                ;
 
                 if (type != null) {
                     loadedObjects.add(new GameObject(j, i, type));
@@ -86,7 +85,7 @@ public class LevelManager {
      */
 
     public int getActualColumns() {
-        return actualColumns;
+        return this.actualColumns;
     }
 
     /**
@@ -96,7 +95,7 @@ public class LevelManager {
      */
 
     public int getActualRows() {
-        return actualRows;
+        return this.actualRows;
     }
 
     /**
@@ -106,7 +105,7 @@ public class LevelManager {
      */
 
     public int getLevelsCount() {
-        File folder = new File(pathToLevels);
+        File folder = new File(this.pathToLevels);
         return Objects.requireNonNull(folder.listFiles((dir, name) -> name.endsWith(".txt"))).length;
     }
 }

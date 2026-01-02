@@ -37,28 +37,28 @@ public class Movement {
         Position currentPos = playerObj.getPosition();
         Position newPos = new Position(currentPos.getX() + deltaX, currentPos.getY() + deltaY);
 
-        if (!inBoard(newPos, gameController.getActualLevelRows(), gameController.getActualLevelColumns())) {
+        if (!this.inBoard(newPos, this.gameController.getActualLevelRows(), this.gameController.getActualLevelColumns())) {
             return;
         }
 
-        ArrayList<GameObject> objects = gameController.getGameObjects();
-        GameObject destObj = getObjectAtPosition(newPos, objects);
+        ArrayList<GameObject> objects = this.gameController.getGameObjects();
+        GameObject destObj = this.getObjectAtPosition(newPos, objects);
 
 
         // Pokiaľ je cielova pozícia prázdna môže sa posunúť
         if (destObj == null || destObj.getObjectType() == ObjectType.BOX_TARGET) {
-            finalizePlayerMove(newPos, playerObj);
+            this.finalizePlayerMove(newPos, playerObj);
             return;
         }
 
         // Pokiaľ je na cielovej pozícii box, môže ho posunúť
         if (destObj.getObjectType() == ObjectType.BOX || destObj.getObjectType() == ObjectType.CORRECT_BOX) {
             Position boxNewPos = new Position(newPos.getX() + deltaX, newPos.getY() + deltaY);
-            if (!inBoard(boxNewPos, gameController.getActualLevelRows(), gameController.getActualLevelColumns())) {
+            if (!this.inBoard(boxNewPos, this.gameController.getActualLevelRows(), this.gameController.getActualLevelColumns())) {
                 return;
             }
 
-            GameObject boxDestObj = getObjectAtPosition(boxNewPos, objects);
+            GameObject boxDestObj = this.getObjectAtPosition(boxNewPos, objects);
             // Môže posunúť iba 1 box
             if (boxDestObj != null && boxDestObj.getObjectType() != ObjectType.BOX_TARGET) {
                 return;
@@ -88,17 +88,17 @@ public class Movement {
             }
 
             // Nakoniec posun hráča
-            finalizePlayerMove(newPos, playerObj);
+            this.finalizePlayerMove(newPos, playerObj);
         }
     }
 
     private void finalizePlayerMove(Position newPos, GameObject playerObj) {
-        this.soundManager.PlayStepSound();
+        this.soundManager.playStepSound();
         playerObj.setPosition(newPos);
         // Refresh obrázok hráča
         playerObj.getImg().makeInvisible();
         playerObj.getImg().makeVisible();
-        gameController.drawGround();
+        this.gameController.drawGround();
     }
 
     private GameObject getObjectAtPosition(Position position, ArrayList<GameObject> gameObjects) {

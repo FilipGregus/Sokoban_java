@@ -38,7 +38,7 @@ public class GameObject {
      */
 
     public Position getPosition() {
-        return position;
+        return this.position;
     }
 
     /**
@@ -61,7 +61,7 @@ public class GameObject {
      */
 
     public ObjectType getObjectType() {
-        return objectType;
+        return this.objectType;
     }
 
     /**
@@ -72,7 +72,7 @@ public class GameObject {
      */
 
     public Image getImg() {
-        return img;
+        return this.img;
     }
 
     /**
@@ -84,7 +84,7 @@ public class GameObject {
 
     private void setImg(ImageData img) {
         if (this.img == null) {
-            this.img = new Image(img, position.getX() * GameController.getBoxSize() + GameController.getIntentX(), position.getY() * GameController.getBoxSize() + GameController.getIntentY());
+            this.img = new Image(img, this.position.getX() * GameController.getBoxSize() + GameController.getIntentX(), this.position.getY() * GameController.getBoxSize() + GameController.getIntentY());
             return;
         }
 

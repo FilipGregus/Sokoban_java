@@ -35,14 +35,14 @@ public class SoundManager {
      * @author Filip Greguš
      */
 
-    public void PlayStepSound() {
+    public void playStepSound() {
         double random = Math.random();
 
-        if (!stepSound1.isPlaying() && !stepSound2.isPlaying()) {
+        if (!this.stepSound1.isPlaying() && !this.stepSound2.isPlaying()) {
             if (random < 0.5) {
-                stepSound1.play();
+                this.stepSound1.play();
             } else {
-                stepSound2.play();
+                this.stepSound2.play();
             }
         }
     }

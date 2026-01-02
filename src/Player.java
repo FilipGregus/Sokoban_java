@@ -22,7 +22,7 @@ public class Player {
         this.playerObject = playerObject;
         this.gameController = gameController;
         GameController.getGameManager().manageObject(this);
-        movement = new Movement(gameController);
+        this.movement = new Movement(gameController);
         playerObject.getImg().makeVisible();
     }
 
@@ -34,7 +34,7 @@ public class Player {
      */
 
     public GameObject getPlayerObject() {
-        return playerObject;
+        return this.playerObject;
     }
 
     /**
@@ -44,8 +44,8 @@ public class Player {
      */
 
     public void moveDown() {
-        movement.makeMove(0, 1, this);
-        gameController.checkWin();
+        this.movement.makeMove(0, 1, this);
+        this.gameController.checkWin();
     }
 
     /**
@@ -55,8 +55,8 @@ public class Player {
      */
 
     public void moveUp() {
-        movement.makeMove(0, -1, this);
-        gameController.checkWin();
+        this.movement.makeMove(0, -1, this);
+        this.gameController.checkWin();
     }
 
     /**
@@ -66,8 +66,8 @@ public class Player {
      */
 
     public void moveLeft() {
-        movement.makeMove(-1, 0, this);
-        gameController.checkWin();
+        this.movement.makeMove(-1, 0, this);
+        this.gameController.checkWin();
     }
 
     /**
@@ -77,7 +77,7 @@ public class Player {
      */
 
     public void moveRight() {
-        movement.makeMove(1, 0, this);
-        gameController.checkWin();
+        this.movement.makeMove(1, 0, this);
+        this.gameController.checkWin();
     }
 }
